@@ -1,6 +1,6 @@
 # Selvedge: AI-Native Mini CRM
 
-Selvedge is an AI-native CRM built for a fictional D2C fashion label ("Roast & Co." used as the example brand throughout) to help marketers intelligently reach their shoppers through personalized, data-driven campaigns via a chat-first experience.
+Selvedge is an AI-native CRM built for Vantage, a fictional D2C fashion label, to help marketers intelligently reach their shoppers through personalized, data-driven campaigns via a chat-first experience.
 
 ## 🔗 Live Demo
 [fashioncrm.your-domain.com](https://your-domain.netlify.app/) ·
@@ -60,6 +60,6 @@ The AI Co-pilot doesn't just generate text; it acts as an orchestration layer ov
 
 ## 🚫 Conscious Scope Decisions
 - No auth/login — out of scope for a demo CRM
-- No multi-tenancy — single brand (Roast & Co.) by design
+- No multi-tenancy — single brand (Vantage) by design
 - No real messaging provider — channel stub models the full async lifecycle
 - No mobile responsive design — marketers use desktop

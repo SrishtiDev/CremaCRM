@@ -40,7 +40,7 @@ export function Sidebar() {
       <div className="h-16 flex items-center px-6 border-b border-border/50">
         <div className="font-semibold text-foreground flex items-center gap-3">
           <span className="text-2xl drop-shadow-md">☕</span>
-          <span className="tracking-tight text-lg">BrewCRM</span>
+          <span className="tracking-tight text-lg">PercolateCRM</span>
         </div>
       </div>
       

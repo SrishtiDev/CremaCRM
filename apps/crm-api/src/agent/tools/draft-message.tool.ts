@@ -34,7 +34,8 @@ export function createDraftMessageTool() {
     async (input: z.infer<typeof draftSchema>) => {
       const llm = createLLM();
 
-      const prompt = `You are a marketing copywriter for a coffee chain called Roast & Co.
+      const prompt = `You are a marketing copywriter for Vantage, a fashion label.
+Write fashion-retail campaign copy using relevant ideas such as new drops, restocks, style recommendations, occasion edits, and loyalty tiers. Keep every message and reward concept specific to fashion retail.
 Write a personalized message template using these variables:
 - {{customer.name}} — the customer's first name
 - {{customer.totalOrders}} — how many orders they've placed
@@ -80,7 +81,7 @@ Return a valid JSON object (no markdown, no code fences) with this exact structu
     {
       name: 'draft_message',
       description:
-        'Draft a personalized message template for a campaign. Returns the template with sample personalized previews.',
+        'Draft a personalized Vantage fashion-retail campaign message for new drops, restocks, style recommendations, occasion edits, loyalty tiers, or other shopper engagement goals. Returns the template with sample personalized previews.',
       schema: draftSchema,
     },
   );

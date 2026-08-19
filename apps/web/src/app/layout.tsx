@@ -8,8 +8,8 @@ import { Toaster } from "sonner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "BrewCRM",
-  description: "AI-native Mini CRM for Roast & Co.",
+  title: "Percolate",
+  description: "AI-native Mini CRM for Vantage.",
 };
 
 export default function RootLayout({

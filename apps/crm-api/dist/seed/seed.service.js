@@ -46,42 +46,56 @@ const LAST_NAMES = [
     'Roy', 'Dutta', 'Majumdar',
 ];
 const TAGS_POOL = [
-    'loyalty-member',
-    'cold-brew-fan',
-    'morning-regular',
-    'weekend-visitor',
-    'subscription',
+    'vantage-insider',
+    'new-drop-shopper',
+    'denim-regular',
+    'occasionwear-shopper',
+    'accessories-buyer',
+    'restock-alerts',
 ];
-const PRODUCT_CATEGORIES = ['coffee', 'food', 'merchandise', 'subscription'];
-const PRODUCT_WEIGHTS = [0.5, 0.25, 0.15, 0.1];
-const COFFEE_ITEMS = [
-    { name: 'Espresso', price: 180 },
-    { name: 'Cappuccino', price: 220 },
-    { name: 'Cold Brew', price: 250 },
-    { name: 'Latte', price: 230 },
-    { name: 'Americano', price: 190 },
-    { name: 'Mocha', price: 260 },
-    { name: 'Filter Coffee', price: 150 },
-    { name: 'Flat White', price: 240 },
-];
-const FOOD_ITEMS = [
-    { name: 'Croissant', price: 180 },
-    { name: 'Sandwich', price: 250 },
-    { name: 'Brownie', price: 150 },
-    { name: 'Muffin', price: 130 },
-    { name: 'Cookie', price: 100 },
-    { name: 'Bagel', price: 200 },
-];
-const MERCH_ITEMS = [
-    { name: 'Roast & Co. Mug', price: 450 },
-    { name: 'Tote Bag', price: 350 },
-    { name: 'T-Shirt', price: 500 },
-    { name: 'Tumbler', price: 400 },
-];
-const SUB_ITEMS = [
-    { name: 'Monthly Coffee Box', price: 999 },
-    { name: 'Weekly Brew Plan', price: 599 },
-    { name: 'Annual Membership', price: 2999 },
+const PRODUCT_CATEGORIES = [
+    {
+        name: 'Tees & Basics',
+        weight: 0.28,
+        minPrice: 799,
+        maxPrice: 1499,
+        items: ['Essential Crew-Neck Tee', 'Ribbed Tank Top', 'Relaxed-Fit Tee', 'Long-Sleeve Basic', 'Cropped Jersey Tee'],
+    },
+    {
+        name: 'Shirts & Tops',
+        weight: 0.22,
+        minPrice: 1299,
+        maxPrice: 2999,
+        items: ['Linen Blend Shirt', 'Satin Drape Top', 'Oxford Oversized Shirt', 'Printed Camp-Collar Shirt', 'Textured Knit Top'],
+    },
+    {
+        name: 'Denim & Trousers',
+        weight: 0.18,
+        minPrice: 1999,
+        maxPrice: 3999,
+        items: ['Straight-Leg Jeans', 'Wide-Leg Trousers', 'High-Rise Flared Jeans', 'Relaxed Cargo Trousers', 'Tapered Tailored Pants'],
+    },
+    {
+        name: 'Dresses & Co-ords',
+        weight: 0.14,
+        minPrice: 1799,
+        maxPrice: 4499,
+        items: ['Ruched Midi Dress', 'Relaxed Shirt Dress', 'Printed Co-ord Set', 'Tailored Waistcoat Set', 'Knit Column Dress'],
+    },
+    {
+        name: 'Outerwear',
+        weight: 0.07,
+        minPrice: 3499,
+        maxPrice: 7999,
+        items: ['Cropped Denim Jacket', 'Utility Overshirt', 'Single-Breasted Blazer', 'Quilted Bomber Jacket', 'Longline Trench Jacket'],
+    },
+    {
+        name: 'Accessories',
+        weight: 0.11,
+        minPrice: 699,
+        maxPrice: 2499,
+        items: ['Structured Mini Bag', 'Leather-Effect Belt', 'Embroidered Cap', 'Layered Pendant Necklace', 'Sculpted Hoop Earrings'],
+    },
 ];
 let SeedService = SeedService_1 = class SeedService {
     constructor(customerRepo, orderRepo, segmentRepo) {
@@ -198,42 +212,25 @@ let SeedService = SeedService_1 = class SeedService {
             }
             const customer = customers[customerIndex];
             const catRand = Math.random();
-            let category;
-            let items;
             let cumulativeWeight = 0;
             let selectedCategory = PRODUCT_CATEGORIES[0];
-            for (let k = 0; k < PRODUCT_WEIGHTS.length; k++) {
-                cumulativeWeight += PRODUCT_WEIGHTS[k];
+            for (const productCategory of PRODUCT_CATEGORIES) {
+                cumulativeWeight += productCategory.weight;
                 if (catRand < cumulativeWeight) {
-                    selectedCategory = PRODUCT_CATEGORIES[k];
+                    selectedCategory = productCategory;
                     break;
                 }
             }
-            category = selectedCategory;
-            let itemPool;
-            switch (category) {
-                case 'coffee':
-                    itemPool = COFFEE_ITEMS;
-                    break;
-                case 'food':
-                    itemPool = FOOD_ITEMS;
-                    break;
-                case 'merchandise':
-                    itemPool = MERCH_ITEMS;
-                    break;
-                case 'subscription':
-                    itemPool = SUB_ITEMS;
-                    break;
-                default:
-                    itemPool = COFFEE_ITEMS;
-            }
-            const numItems = 1 + Math.floor(Math.random() * 2);
+            const numItems = Math.random() < 0.25 ? 2 : 1;
             const orderItems = [];
             let totalAmount = 0;
             for (let j = 0; j < numItems; j++) {
-                const item = itemPool[Math.floor(Math.random() * itemPool.length)];
-                orderItems.push({ name: item.name, quantity: 1, price: item.price });
-                totalAmount += item.price;
+                const itemName = selectedCategory.items[Math.floor(Math.random() * selectedCategory.items.length)];
+                const price = Math.floor(selectedCategory.minPrice +
+                    Math.random() *
+                        (selectedCategory.maxPrice - selectedCategory.minPrice + 1));
+                orderItems.push({ name: itemName, quantity: 1, price });
+                totalAmount += price;
             }
             const firstOrderTime = customer.firstOrderAt
                 ? new Date(customer.firstOrderAt).getTime()
@@ -246,7 +243,7 @@ let SeedService = SeedService_1 = class SeedService {
                 customerId: customer.id,
                 amount: totalAmount,
                 status: 'completed',
-                productCategory: category,
+                productCategory: selectedCategory.name,
                 items: orderItems,
                 orderedAt: new Date(orderTime),
             });
@@ -282,8 +279,8 @@ let SeedService = SeedService_1 = class SeedService {
             },
             {
                 name: 'High Spenders',
-                description: 'Customers who have spent ₹2000 or more',
-                rules: [{ field: 'totalSpent', operator: 'gte', value: 2000 }],
+                description: 'Customers who have spent ₹15000 or more',
+                rules: [{ field: 'totalSpent', operator: 'gte', value: 15000 }],
             },
             {
                 name: 'At Risk',
