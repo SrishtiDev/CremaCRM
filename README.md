@@ -1,14 +1,13 @@
-# Percolate: AI-Native Mini CRM
+# Selvedge: AI-Native Mini CRM
 
-Percolate is designed for a fictional specialty coffee chain ("Roast & Co.") to help marketers intelligently reach their shoppers through personalized, data-driven campaigns via a chat-first experience.
+Selvedge is an AI-native CRM built for a fictional D2C fashion label ("Roast & Co." used as the example brand throughout) to help marketers intelligently reach their shoppers through personalized, data-driven campaigns via a chat-first experience.
 
 ## 🔗 Live Demo
-[brewcrm.your-domain.com](https://coffeebrewcrm.netlify.app/) · 
-## 🎯 The Challenge & Approach
+[fashioncrm.your-domain.com](https://your-domain.netlify.app/) ·
 
-The assignment required building a system to ingest data, segment shoppers, send personalized communications, and track performance using a stubbed channel service—all while being deeply "AI-native."
+## 🎯 The Approach
 
-Instead of bolting an AI chatbot onto a traditional SaaS interface, **BrewCRM is built as a true AI agent (Co-pilot).** The marketer describes their intent in natural language (e.g., *"Send a WhatsApp thank you message to my top 5 most loyal customers"*), and the AI autonomously handles the data querying, segmentation, copywriting, reach estimation, and campaign launch.
+Instead of bolting an AI chatbot onto a traditional SaaS interface, **FashionCRM is built as a true AI agent (Co-pilot).** The marketer describes their intent in natural language (e.g., *"Send a WhatsApp thank you message to my top 5 most loyal customers"*), and the AI autonomously handles the data querying, segmentation, copywriting, reach estimation, and campaign launch.
 
 ## ✨ Features
 
@@ -20,7 +19,7 @@ Instead of bolting an AI chatbot onto a traditional SaaS interface, **BrewCRM is
    - The AI drafts channel-specific copy (WhatsApp, Email, SMS) using template variables (`{{customer.name}}`, `{{customer.totalSpent}}`).
    - The backend personalizes the template for each recipient at launch time.
 4. **Channel Service & Asynchronous Callbacks (The Loop)**
-   - **Crucial Requirement:** A completely standalone microservice (`channel-stub`) simulates the messaging network.
+   - A completely standalone microservice (`channel-stub`) simulates the messaging network.
    - The CRM enqueues BullMQ jobs to send messages to the stub.
    - The stub asynchronously processes deliveries with realistic delays and randomly simulates engagement outcomes.
    - The stub fires webhooks back to the CRM's `/receipts` API (Delivered, Opened, Clicked, Ordered, Failed).
@@ -45,7 +44,7 @@ The project is structured as a monorepo containing three main applications:
 
 ## 🤖 The AI-Native Workflow
 
-The AI Co-pilot doesn't just generate text; it acts as an orchestration layer over the CRM's business logic. 
+The AI Co-pilot doesn't just generate text; it acts as an orchestration layer over the CRM's business logic.
 
 1. **Understand & Query**: The agent translates natural language into a structured query using `query_customers` (with SQL-level sorting and limits to prevent loading massive datasets into memory).
 2. **Segment**: It uses `build_segment` to save the targeted audience in the database.
