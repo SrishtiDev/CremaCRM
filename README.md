@@ -1,13 +1,13 @@
-# Selvedge: AI-Native Mini CRM
+# CremaCRM: AI-Native Mini CRM
 
-Selvedge is an AI-native CRM built for Vantage, a fictional D2C fashion label, to help marketers intelligently reach their shoppers through personalized, data-driven campaigns via a chat-first experience.
+CremaCRM is an AI-native CRM built for Vantage, a fictional D2C fashion label, to help marketers intelligently reach their shoppers through personalized, data-driven campaigns via a chat-first experience.
 
 ## 🔗 Live Demo
 [fashioncrm.your-domain.com](https://your-domain.netlify.app/) ·
 
 ## 🎯 The Approach
 
-Instead of bolting an AI chatbot onto a traditional SaaS interface, **FashionCRM is built as a true AI agent (Co-pilot).** The marketer describes their intent in natural language (e.g., *"Send a WhatsApp thank you message to my top 5 most loyal customers"*), and the AI autonomously handles the data querying, segmentation, copywriting, reach estimation, and campaign launch.
+Instead of bolting an AI chatbot onto a traditional SaaS interface, **CremaCRM is built as a true AI agent (Co-pilot).** The marketer describes their intent in natural language (e.g., *"Send a WhatsApp thank you message to my top 5 most loyal customers"*), and the AI autonomously handles the data querying, segmentation, copywriting, reach estimation, and campaign launch.
 
 ## ✨ Features
 
