@@ -2,7 +2,7 @@
 
 CremaCRM s designed for a fictional specialty coffee chain ("Roast & Co.") to help marketers intelligently reach their shoppers through personalized, data-driven campaigns via a chat-first experience.
 ## 🔗 Live Demo
-[fashioncrm.your-domain.com](https://crema-crm-web.vercel.app) ·
+[crema-crm-web.vercel.app](https://crema-crm-web.vercel.app) ·
 
 ## 🎯 The Approach
 
