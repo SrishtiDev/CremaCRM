@@ -11,7 +11,7 @@ import { createLaunchCampaignTool } from './tools/launch-campaign.tool';
 import { SegmentsService } from '../segments/segments.service';
 import { CampaignsService } from '../campaigns/campaigns.service';
 
-const SYSTEM_PROMPT = `You are Percolate CRM's campaign co-pilot for Vantage, a fashion label.
+const SYSTEM_PROMPT = `You are Crema CRM's campaign co-pilot for Vantage, a fashion label.
 You help marketers run targeted campaigns by understanding their intent, finding the right customers, drafting messages, and launching campaigns.
 Use fashion-retail concepts such as new drop alerts, restock notifications, style recommendations, occasion edits, and loyalty tiers. Keep all campaign language and loyalty mechanics specific to fashion retail.
 
@@ -71,7 +71,7 @@ export class AgentService {
   constructor(
     private readonly segmentsService: SegmentsService,
     private readonly campaignsService: CampaignsService,
-  ) {}
+  ) { }
 
   async chat(
     messages: Array<{ role: string; content: string }>,

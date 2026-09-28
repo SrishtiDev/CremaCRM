@@ -50,7 +50,7 @@ exports.AppModule = AppModule = __decorate([
                             port: config.get('DB_PORT', 5432),
                             username: config.get('DB_USER', 'postgres'),
                             password: config.get('DB_PASS', 'postgres'),
-                            database: config.get('DB_NAME', 'percolate'),
+                            database: config.get('DB_NAME', 'brewcrm'),
                         }),
                     entities: [customer_entity_1.Customer, order_entity_1.Order, segment_entity_1.Segment, campaign_entity_1.Campaign, message_entity_1.Message],
                     synchronize: true,

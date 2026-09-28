@@ -1,18 +1,28 @@
-version: '3.8'
 services:
   postgres:
     image: postgres:15-alpine
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: percolate
+      POSTGRES_DB: CremaCRM
     ports:
       - '5433:5432'
     volumes:
       - pgdata:/var/lib/postgresql/data
 
   redis:
-    image: redis:7-alpine      
+    image: redis:7-alpine
+    ports:
+      - '6380:6379'
+
+  prom-server:
+    image: prom/prometheus
+    profiles:
+      - monitoring
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./prometheus-config.yml:/etc/prometheus/prometheus.yml
 
   crm-api:
     build: ./apps/crm-api
@@ -23,9 +33,10 @@ services:
       DB_PORT: 5432
       DB_USER: postgres
       DB_PASS: postgres
-      DB_NAME: percolate
+      DB_NAME: CremaCRM
       #UPSTASH_REDIS_URL: ${UPSTASH_REDIS_URL}
       REDIS_HOST: redis
+      REDIS_PORT: 6379
       CHANNEL_STUB_URL: http://channel-stub:3001
       CRM_API_URL: http://crm-api:3000
       FRONTEND_URL: http://localhost:3002
@@ -33,21 +44,25 @@ services:
       OPENROUTER_API_KEY: ${OPENROUTER_API_KEY}
       OPENROUTER_MODEL: ${OPENROUTER_MODEL:-deepseek/deepseek-chat:free}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      GEMINI_MODEL: ${GEMINI_MODEL}
     depends_on:
       - postgres
+      - redis
 
   channel-stub:
     build: ./apps/channel-stub
     ports:
       - '3001:3001'
     environment:
-      UPSTASH_REDIS_URL: ${UPSTASH_REDIS_URL}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
       CRM_API_URL: http://crm-api:3000
     depends_on:
-      - postgres
+      - redis
 
   web:
-    build: 
+    build:
       context: ./apps/web
       dockerfile: Dockerfile
     ports:

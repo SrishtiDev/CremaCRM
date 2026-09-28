@@ -12,5 +12,8 @@
     "seed": "npm run seed -w crm-api",
     "build:web": "npm run build -w web",
     "build:all": "npm run build -w crm-api && npm run build -w channel-stub && npm run build -w web"
+  },
+  "dependencies": {
+    "prom-client": "^15.1.3"
   }
 }

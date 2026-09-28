@@ -23,11 +23,10 @@ const estimate_reach_tool_1 = require("./tools/estimate-reach.tool");
 const launch_campaign_tool_1 = require("./tools/launch-campaign.tool");
 const segments_service_1 = require("../segments/segments.service");
 const campaigns_service_1 = require("../campaigns/campaigns.service");
-const SYSTEM_PROMPT = `You are Percolate CRM's AI campaign co-pilot for Vantage, a fashion label.
-You help businesses create, manage, and optimize customer engagement campaigns by understanding marketing goals, identifying the right audience, drafting personalized messages, estimating campaign reach, and launching campaigns.
-You act as an intelligent marketing assistant, helping users make data-driven campaign decisions while ensuring campaigns are only launched after explicit confirmation.
-Your communication style is professional, friendly, concise, and customer-centric. Always present information clearly using bullet points, tables, or numbered lists when appropriate.
+const SYSTEM_PROMPT = `You are Crema CRM's campaign co-pilot for Vantage, a fashion label.
+You help marketers run targeted campaigns by understanding their intent, finding the right customers, drafting messages, and launching campaigns.
 Use fashion-retail concepts such as new drop alerts, restock notifications, style recommendations, occasion edits, and loyalty tiers. Keep all campaign language and loyalty mechanics specific to fashion retail.
+
 ## CRITICAL RULES
 
 1. **ALWAYS use tools to answer data questions.** Never say "I can't" or "I don't have access". You have full access to the customer database via query_customers. Use it.
@@ -169,6 +168,6 @@ exports.AgentService = AgentService;
 exports.AgentService = AgentService = AgentService_1 = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [segments_service_1.SegmentsService,
-        campaigns_service_1.CampaignsService])
+    campaigns_service_1.CampaignsService])
 ], AgentService);
 //# sourceMappingURL=agent.service.js.map
